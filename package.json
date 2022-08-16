@@ -1,0 +1,25 @@
+{
+  "name": "mouse-and-scroll",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/MouseAndScroll.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack watch --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leastimperfect/scrollytelling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leastimperfect/scrollytelling/issues"
+  },
+  "homepage": "https://github.com/leastimperfect/scrollytelling#readme",
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
