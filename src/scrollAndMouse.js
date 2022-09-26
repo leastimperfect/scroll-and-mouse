@@ -1,10 +1,17 @@
+/**
+ * Scroll and mouse animations
+ * @copyright 2022 Least imperfect Pte Ltd
+ * @link https://github.com/leastimperfect/mouse-and-scroll
+ * @author shramee@leastimperfect.com
+ */
+
 export default class ScrollAndMouse {
 	scrollTargets = [];
 
 	centerWidth = .3
 
-	constructor( {scrollSelector, watchMouse} ) {
-		this.watchScroll( scrollSelector );
+	constructor( scrollSelector, watchMouse ) {
+		scrollSelector && this.watchScroll( scrollSelector );
 		watchMouse && this.watchMouse();
 	}
 
@@ -97,15 +104,28 @@ export default class ScrollAndMouse {
 		this.watchScrollCb();
 	}
 
+	addScrollTarget( el ) {
+		if( ! el ) return;
+		const offset = el.dataset.scrollOffset || window.innerHeight / 5;
+		const inView = false;
+		this.scrollTargets.push( {el, offset, inView} );
+		this.scrollTargets && this.watchScrollSetup();
+	}
+
 	watchScroll( selector ) {
 		document.querySelectorAll( selector ).forEach( el => {
 			const offset = el.dataset.scrollOffset || window.innerHeight / 5;
 			const inView = false;
 			this.scrollTargets.push( {el, offset, inView} );
 		} );
-		if ( this.scrollTargets.length ) {
-			this.watchScrollSetup();
-		}
+		this.scrollTargets && this.watchScrollSetup();
+	}
+
+	staggerChildren( el, gapSeconds = .5, beginDelay = 0 ) {
+		if( ! el ) return;
+		[...el.children].forEach( (ch, i) => {
+			ch.style.animationDelay = (beginDelay + i * gapSeconds) + 's'
+		} )
 	}
 }
 
