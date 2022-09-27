@@ -105,7 +105,10 @@ export default class ScrollAndMouse {
 	}
 
 	addScrollTarget( el ) {
-		if( ! el ) return;
+		if( ! el ) {
+			console.error( 'ScrollAndMouse.addScrollTarget requires element to watch.' )
+			return;
+		}
 		const offset = el.dataset.scrollOffset || window.innerHeight / 5;
 		const inView = false;
 		this.scrollTargets.push( {el, offset, inView} );
